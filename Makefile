@@ -6,7 +6,7 @@
 #    By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/07/08 23:57:01 by ivankozlov       ###   ########.fr        #
+#    Updated: 2019/07/10 08:33:15 by ivankozlov       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ LIBFT_DIR = libft/
 
 # files
 SRC := $(wildcard $(SRC_DIR)*.c)
+SRC += $(wildcard $(SRC_DIR)**/*.c)
 OBJ := $(SRC:$(SRC_DIR)%=%)
 OBJ := $(patsubst %, $(OBJ_DIR)%, $(OBJ:.c=.o))
 
@@ -51,7 +52,9 @@ $(LIBFT):
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)$(ACTIONS_DIR)
+	mkdir -p $(OBJ_DIR)command_line/
+	mkdir -p $(OBJ_DIR)termconfig/
+	mkdir -p $(OBJ_DIR)signal/
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(LIB) -o $(NAME) $(OBJ)
