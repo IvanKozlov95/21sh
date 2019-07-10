@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 20:37:32 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 14:14:10 by batman           ###   ########.fr       */
+/*   Created: 2019/05/21 07:22:57 by ivankozlov        #+#    #+#             */
+/*   Updated: 2019/08/23 18:07:54 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void		sigkill_handler(int signo)
+int		exitt(char *name, char **args)
 {
-	/*
-	** Use the common idiom of 128 + signal number for signal exits.
-	** Alternative approach is to reset the signal to default handler,
-	** and immediately raise() it.
-	*/
-	exit(128 + signo);
+	(void)name;
+	(void)args;
+	exit(0);
 }
