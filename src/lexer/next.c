@@ -6,7 +6,7 @@
 /*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:38:36 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/10 16:23:14 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/07/15 13:43:42 by ivankozlov       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,26 @@
 
 static t_atom_type		get_atom_type(int ch)
 {
-	static t_atom_type		ascii_type_lookup_table[] = {
-		eos, unkn, unkn, unkn, unkn, unkn, unkn, unkn,
-		unkn, whitespc, unkn, unkn, unkn, unkn, unkn, unkn,
-		unkn, unkn, unkn, unkn, unkn, unkn, unkn, unkn,
-		unkn, unkn, unkn, unkn, unkn, unkn, unkn, unkn,
-		whitespc, unkn, nonterm, unkn, nonterm, unkn, nonterm, nonterm,
-		nonterm, nonterm, unkn, unkn, unkn, term, unkn, term,
-		term, term, term, term, term, term, term, term,
-		unkn, unkn, unkn, unkn, double_nonterm, unkn, double_nonterm, unkn,
-		unkn, term, term, term, term, term, term, term,
-		term, term, term, term, term, term, term, term,
-		term, term, term, term, term, term, term, term,
-		term, term, term, unkn, unkn, unkn, unkn, term,
-		nonterm, term, term, term, term, term, term, term,
-		term, term, term, term, term, term, term, term,
-		term, term, term, term, term, term, term, term,
-		term, term, term, nonterm, nonterm, nonterm, unkn, unkn,
-	};
+	static bool				initialized = false;
+	static t_atom_type		ascii_lookup[128] = { gnrl };
 
-	return (ascii_type_lookup_table[ch]);
-}
-
-static bool		step(t_fsm *fsm, int ch)
-{
-	int				next_state_idx;
-	t_atom_type		atom_type;
-
-	atom_type = get_atom_type(ch);
-	next_state_idx = fsm->current.out[atom_type];
-	if (next_state_idx != -1)
-		fsm->current = fsm->states[next_state_idx];
-	return (next_state_idx == -1);
+	if (!initialized)
+	{
+		ascii_lookup['\0'] = eos;
+		ascii_lookup['|'] = ppipe;
+		ascii_lookup['&'] = apsd;
+		ascii_lookup['\''] = quote;
+		ascii_lookup['"'] = quote;
+		ascii_lookup['`'] = bquote;
+		ascii_lookup[';'] = smcln;
+		ascii_lookup[' '] = whitespc;
+		ascii_lookup['\t'] = ttab;
+		ascii_lookup['\n'] = nl;
+		ascii_lookup['<'] = ls;
+		ascii_lookup['>'] = gt;
+		initialized = true;
+	}
+	return (ascii_lookup[ch]);
 }
 
 static bool		is_valid_atom(int atom)
@@ -61,33 +49,49 @@ static bool		is_valid_atom(int atom)
 	return (type != unkn);
 }
 
-t_token		*next_token(t_lexer *lexer)
+static bool		should_add_atom(t_lexer *l, t_atom_type curr_atom)
 {
-	t_token		*ret;
-	t_string	*lexeme;
-	bool		done;
-	bool		valid;
+	if (l->quote_type != unkn)
+		return (curr_atom == l->quote_type ? false : true);
+	return (curr_atom != whitespc && curr_atom != ttab);
+}
+
+static char		*build_lexeme(t_lexer *lexer)
+{
+	bool			done;
+	bool			valid;
+	t_string		*lexeme;
+	t_atom_type		curr_atom_type;
 
 	done = false;
 	valid = true;
+	lexeme = string_init(0);
+	while (lexer->current_state != fsm_end && lexer->current_state != fsm_error
+		&& lexer->input)
+	{
+		curr_atom_type = get_atom_type(*lexer->input);
+		if (curr_atom_type == unkn)
+			set_error(error_unkn_atom, SH_PREFIX"Unexpected symbol '%c'\n",
+				*lexer->input);
+		switch_state(lexer, curr_atom_type);
+		if (should_add_atom(lexer, curr_atom_type))
+			string_appendn(lexeme, lexer->input, 1);
+		lexer->input++;
+	}
+	return (string_destroy(lexeme, lexer->current_state != fsm_error));
+}
+
+t_token		*next_token(t_lexer *lexer)
+{
+	char		*token_value;
+
 	if (*lexer->input == '\0')
 		return (NULL);
-	lexeme = string_init(0);
-	ret = ft_memalloc(sizeof(t_token));
-	while (!done && valid)
-	{
-		valid = is_valid_atom(*lexer->input);
-		if (valid)
-		{
-			done = step(lexer->fsm, *lexer->input);
-			if (!done && valid)
-				string_appendn(lexeme, lexer->input, 1);
-		}
-		lexer->input += !done || !valid;
-	}
-	if (done)
-		ret->value = string_destroy(lexeme, true);
-	// todo:fix leak
-	lexer->fsm->current = lexer->fsm->start;
-	return (ret);
+	lexer->current_state = fsm_start;
+	lexer->quote_type = unkn;
+	lexer->special_type = unkn;
+	token_value = build_lexeme(lexer);
+	if (!token_value)
+		return (NULL);
+	return (create_token(token_value));
 }
