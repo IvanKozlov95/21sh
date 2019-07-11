@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/08 23:41:01 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/10 11:20:22 by ivankozlov       ###   ########.fr       */
+/*   Created: 2019/07/10 08:42:13 by ivankozlov        #+#    #+#             */
+/*   Updated: 2019/07/10 13:52:52 by ivankozlov       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
+#include "fsm.h"
+#include "lexer.h"
 
-
-
-int		main(void)
+t_lexer			*init_lexer(char *input)
 {
-	// init_termconfig();
-	init_signal_handlers();
-	while (1)
-	{
-		display_prompt();
-		handle_input();
-	}
+	static t_lexer		lexer;
+
+	lexer.fsm = init_fsm();
+	lexer.input = input;
+	return (&lexer);
 }

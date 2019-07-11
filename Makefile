@@ -6,7 +6,7 @@
 #    By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/07/10 08:33:15 by ivankozlov       ###   ########.fr        #
+#    Updated: 2019/07/10 13:56:31 by ivankozlov       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,8 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)command_line/
 	mkdir -p $(OBJ_DIR)termconfig/
 	mkdir -p $(OBJ_DIR)signal/
+	mkdir -p $(OBJ_DIR)fsm/
+	mkdir -p $(OBJ_DIR)lexer/
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(LIB) -o $(NAME) $(OBJ)
