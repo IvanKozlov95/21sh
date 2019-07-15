@@ -6,7 +6,7 @@
 /*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/10 15:50:58 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/07/15 14:04:33 by ivankozlov       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,23 @@ static char		*get_input(void)
 	return (string_destroy(s, true));
 }
 
+void			token_debug_info(t_list *elem)
+{
+	t_token		*token;
+
+	token = elem->content;
+	ft_printf("token: |%s| type: %d\n",
+		token->value, token->type);
+}
+
 void			handle_input(void)
 {
+	t_list 		*tkns;
 	char		*input;
 	t_lexer		*lexer;
-	t_token		*token;
 
 	input = get_input();
 	lexer = init_lexer(input);
-	while ((token = next_token(lexer)))
-	{
-		ft_printf("token: |%s|\n", token->value);
-	}
+	tkns = get_token_list(lexer);
+	ft_lstiter(tkns, token_debug_info);
 }

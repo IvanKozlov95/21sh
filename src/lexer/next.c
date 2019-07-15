@@ -6,7 +6,7 @@
 /*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:38:36 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/15 13:43:42 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/07/15 14:06:06 by ivankozlov       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_atom_type		get_atom_type(int ch)
 		ascii_lookup['|'] = ppipe;
 		ascii_lookup['&'] = apsd;
 		ascii_lookup['\''] = quote;
-		ascii_lookup['"'] = quote;
+		ascii_lookup['"'] = dquote;
 		ascii_lookup['`'] = bquote;
 		ascii_lookup[';'] = smcln;
 		ascii_lookup[' '] = whitespc;
@@ -93,5 +93,5 @@ t_token		*next_token(t_lexer *lexer)
 	token_value = build_lexeme(lexer);
 	if (!token_value)
 		return (NULL);
-	return (create_token(token_value));
+	return (create_token(lexer, token_value));
 }
