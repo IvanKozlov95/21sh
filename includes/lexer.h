@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
+/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:42:57 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/15 13:57:34 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/08/22 15:08:39 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_token						*next_token(t_lexer *lexer);
 **	src/lexer/token.c
 */
 t_token						*create_token(t_lexer *l, char *value);
+void						delete_token(void *token_list, size_t size);
 
 /*
 **	src/lexer/switch.c
