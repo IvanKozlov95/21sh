@@ -12,8 +12,6 @@
 
 #include "21sh.h"
 
-
-
 int		main(void)
 {
 	// init_termconfig();
