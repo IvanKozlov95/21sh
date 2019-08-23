@@ -6,16 +6,15 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 03:16:52 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 18:42:14 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/28 18:42:33 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
+#include "chars.h"
 #include "ftstring.h"
 
 t_dict	*g_env;
-
-// todo: move to ternconfig
 
 bool	valid_env_name(char *name)
 {

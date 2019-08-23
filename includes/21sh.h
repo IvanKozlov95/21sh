@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 18:41:54 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/28 18:42:39 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include "dictionary.h"
 
 # define SH_PREFIX "21sh: "
+# define HOME "HOME"
+# define OLDPWD "OLDPWD"
+# define CDHOME "~"
+# define CDHOME2 "--"
+# define CDOLDPWD "-"
+# define EXIT_SIGNAL 0
 
 extern t_dict					*g_env;
 
@@ -77,5 +83,18 @@ void						execute_ast_tree(t_btree_node *ast);
 */
 
 void						init_env(void);
+bool						valid_env_name(char *name);
+
+/*
+**	src/builtins
+*/
+typedef int					(*t_builtin_func) (char *, char **);
+t_builtin_func				get_builtin_func(char *name);
+int							cd(char *name, char **args);
+int							env(char *name, char **args);
+int							echo(char *name, char **args);
+int							exitt(char *name, char **args);
+int							setenv_21sh(char *name, char **args);
+int							unsetenv_21sh(char *name, char **args);
 
 #endif

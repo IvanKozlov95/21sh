@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   unsetenv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 07:22:57 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 14:14:59 by batman           ###   ########.fr       */
+/*   Created: 2019/05/21 07:21:29 by ivankozlov        #+#    #+#             */
+/*   Updated: 2019/08/23 15:53:11 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
-#include <stdlib.h>
 
-int		exitt(char *name, char **args)
+int		unsetenv_21sh(char *name, char **args)
 {
 	(void)name;
-	(void)args;
-	exit(EXIT_SIGNAL);
+	if (!*args)
+		set_error(-1, "unsetenv: Too few arguments.\n");
+	else
+		while (*args)
+		{
+			dict_remove(g_env, *args);
+			args++;
+		}
+	return (0);
 }
