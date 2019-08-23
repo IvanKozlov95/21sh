@@ -6,10 +6,11 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/22 13:17:31 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/22 18:14:47 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "21sh.h"
 #include "lexer.h"
 #include "parser.h"
 #include "dstring.h"
@@ -47,5 +48,5 @@ void			handle_input(void)
 	lexer = init_lexer(input);
 	tkns = get_token_list(lexer);
 	ft_lstiter(tkns, token_debug_info);
-	parse(tkns);
+	execute_ast_tree(parse(tkns));
 }

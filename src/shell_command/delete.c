@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/22 15:11:03 by batman            #+#    #+#             */
-/*   Updated: 2019/08/22 18:18:58 by batman           ###   ########.fr       */
+/*   Created: 2019/08/22 17:52:46 by batman            #+#    #+#             */
+/*   Updated: 2019/08/22 17:55:38 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "memory.h"
+#include "ftstring.h"
+#include "shell_command.h"
 
-t_list		*g_current_token_list;
-
-t_btree_node		*parse(t_list *tokenlist)
+void				delete_shell_command(t_shell_command *command)
 {
-	t_btree_node		*ast_tree;
+	int		i;
 
-	g_current_token_list = tokenlist;
-	ast_tree = program();
-	// ft_lstdel(&tokenlist, delete_token);
-	return (ast_tree);
+	i = -1;
+	while (++i < command->argc)
+		ft_free(1, command->argv[i]);
+	ft_free(2, command->argv, command);
 }

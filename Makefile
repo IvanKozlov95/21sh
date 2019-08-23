@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+         #
+#    By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/07/15 13:45:40 by ivankozlov       ###   ########.fr        #
+#    Updated: 2019/08/22 18:11:11 by batman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)signal/
 	mkdir -p $(OBJ_DIR)lexer/
 	mkdir -p $(OBJ_DIR)parser/
+	mkdir -p $(OBJ_DIR)shell_command/
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(LIB) -o $(NAME) $(OBJ)
