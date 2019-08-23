@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   switch.c                                           :+:      :+:    :+:   */
+/*   switch_state.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
+/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:10:30 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/15 13:44:44 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/08/23 16:21:59 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			switch_state(t_lexer *l, t_atom_type curr_atom)
 {
 	if (curr_atom == unkn)
 	{
-		set_error(error_unkn_atom, SH_PREFIX"Unexpected symbol '%c'\n",
+		set_error(error_unkn_atom, "Unexpected symbol '%c'\n",
 			*l->input);
 		l->current_state = fsm_error;
 	}

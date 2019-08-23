@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   next.c                                             :+:      :+:    :+:   */
+/*   next_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
+/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:38:36 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/15 14:06:06 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/08/23 16:21:54 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static bool		is_valid_atom(int atom)
 
 	type = get_atom_type(atom);
 	if (type == unkn)
-		set_error(error_unkn_atom, SH_PREFIX"Unexpected symbol '%c'\n", atom);
+		set_error(error_unkn_atom, "Unexpected symbol '%c'\n", atom);
 	return (type != unkn);
 }
 
@@ -71,7 +71,7 @@ static char		*build_lexeme(t_lexer *lexer)
 	{
 		curr_atom_type = get_atom_type(*lexer->input);
 		if (curr_atom_type == unkn)
-			set_error(error_unkn_atom, SH_PREFIX"Unexpected symbol '%c'\n",
+			set_error(error_unkn_atom, "Unexpected symbol '%c'\n",
 				*lexer->input);
 		switch_state(lexer, curr_atom_type);
 		if (should_add_atom(lexer, curr_atom_type))
