@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 18:41:40 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/28 18:41:54 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 # include <termcap.h>
 
 # include "btree.h"
+# include "dictionary.h"
 
 # define SH_PREFIX "21sh: "
+
+extern t_dict					*g_env;
 
 enum							e_21sh_errcodes
 {
@@ -68,5 +71,11 @@ void							sigkill_handler(int signo);
 */
 
 void						execute_ast_tree(t_btree_node *ast);
+
+/*
+**	src/environ.c
+*/
+
+void						init_env(void);
 
 #endif
