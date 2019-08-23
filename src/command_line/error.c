@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
+/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:29:06 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/07/10 16:02:17 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2019/08/22 21:30:12 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 
 void		set_error(int errcode, char *fmt, ...)
 {
-	errno = errcode;
-		va_list		args;
+	va_list		args;
 
 	va_start(args, fmt);
 	ft_vprintf(STDOUT_FILENO, &args, fmt);
 	va_end(args);
+	ft_printf("\n\n Setting errno to %d\n\n", errcode);
 	errno = errcode;
 }
 
