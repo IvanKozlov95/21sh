@@ -60,7 +60,6 @@ static	int		set_terminal_capabilities(void)
 
 void			reset_config(void)
 {
-	printf("reset_config\n");
 	tcsetattr(g_termconf.descriptor, TCSANOW, &(g_termconf.default_attr));
 }
 
