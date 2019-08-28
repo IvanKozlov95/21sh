@@ -6,26 +6,43 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/22 18:14:47 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/27 15:58:11 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "dstring.h"
+#include "numbers.h"
+#include "output.h"
+#include "ft_printf.h"
 
 #include "21sh.h"
 #include "lexer.h"
 #include "parser.h"
-#include "dstring.h"
-#include "ft_printf.h"
+#include "termconf.h"
+#include "command_line.h"
 
 static char		*get_input(void)
 {
 	t_string	*s;
-	char		buf[2];
+	char		buf[5];
 	int			ret;
 
-	buf[1] = 0;
 	s = string_init(0);
-	while ((ret = read(0, buf, 1)) && buf[0] != '\n')
-		string_append(s, buf);
+	while (42)
+	{
+		ft_bzero(buf, 5);
+		ret = read(0, buf, 4);
+		if (buf[0] == '\n')
+			break ;
+		else if (handle_navigation_keys(CHARPTR_TO_INT(buf)))
+			display_current_command(s->content);
+		else
+		{
+			string_append(s, buf);
+			move_cursor(1, 0);
+			display_current_command(s->content);
+		}
+	}
 	return (string_destroy(s, true));
 }
 

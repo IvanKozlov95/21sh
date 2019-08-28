@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 20:35:12 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/27 15:46:28 by batman           ###   ########.fr       */
+/*   Created: 2019/08/26 20:50:20 by batman            #+#    #+#             */
+/*   Updated: 2019/08/27 02:22:44 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <errno.h>
 
-#include "colors.h"
-#include "ftstring.h"
-#include "ft_printf.h"
+#include "memory.h"
 
+#include "21sh.h"
 #include "command_line.h"
 
-void	display_prompt(void)
-{
-	t_point		cursor;
-	char		cwd[2048 + 1];
+t_command_line		g_command_line;
 
-	getcwd(cwd, 2048);
-	// get_cursor_position(&cursor);
-	// g_command_line.prompt_len =
-		// ft_printf("%s%s%s %d %d > ", BLU, cwd, RESET, cursor.x, cursor.y) - 10;
-		// ft_printf("%2d %2d > ", cursor.x, cursor.y);
-		// ft_printf("", cursor.x, cursor.y);
+void		init_command_line(void)
+{
+	ft_bzero(&g_command_line.cursor_pos, sizeof(t_point));
+	if (get_cursor_position(&g_command_line.cursor_pos))
+		fatal(errno, "Couldn't get cursor pos\n");
 }

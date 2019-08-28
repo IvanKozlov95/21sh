@@ -27,6 +27,11 @@
 # define CDOLDPWD "-"
 # define EXIT_SIGNAL 0
 
+/*
+**	General buffer size
+*/
+# define GNR_BUF_SIZE 100
+
 extern t_dict					*g_env;
 
 enum							e_21sh_errcodes
@@ -49,16 +54,6 @@ void							set_error(int errcode, char *fmt, ...);
 */
 void							reset_config(void);
 void							init_termconfig(void);
-
-/*
-**	src/command_line/prompt.c
-*/
-void							display_prompt(void);
-
-/*
-**	src/command_line/input.c
-*/
-void							handle_input(void);
 
 /*
 **	src/signal/init.c
