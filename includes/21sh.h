@@ -97,4 +97,9 @@ int							exitt(char *name, char **args);
 int							setenv_21sh(char *name, char **args);
 int							unsetenv_21sh(char *name, char **args);
 
+/*
+**	src/keys
+*/
+bool						handle_navigation_keys(int key);
+
 #endif

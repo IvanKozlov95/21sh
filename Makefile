@@ -6,7 +6,7 @@
 #    By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/08/23 15:49:22 by batman           ###   ########.fr        #
+#    Updated: 2019/08/23 19:14:10 by batman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)parser/
 	mkdir -p $(OBJ_DIR)executor/
 	mkdir -p $(OBJ_DIR)builtins/
+	mkdir -p $(OBJ_DIR)keys/
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(LIB) -o $(NAME) $(OBJ)
