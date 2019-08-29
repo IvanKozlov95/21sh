@@ -6,7 +6,7 @@
 #    By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/08/23 19:14:10 by batman           ###   ########.fr        #
+#    Updated: 2019/08/28 18:30:51 by batman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,7 @@ NAME = 21sh
 # compiler
 CC = gcc
 
-ifndef C_ENV
-	export C_ENV=PROD
-endif
+C_ENV ?= PROD
 ifeq (${C_ENV}, DEV)
 	FLAGS = -g
 else ifeq (${C_ENV}, PROD)
@@ -76,7 +74,9 @@ clean:
 	fi;
 
 fclean: clean
-	@make -C $(LIBFT_DIR) fclean
+	@if [ "${LIBS}" ]; then\
+		make -C $(LIBFT_DIR) fclean;\
+	fi;
 	@if test -e $(NAME); then\
 		/bin/rm $(NAME);\
 		/bin/echo "[INFO] $(NAME) executable deleted";\
