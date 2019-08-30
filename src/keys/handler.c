@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 19:00:57 by batman            #+#    #+#             */
-/*   Updated: 2019/08/27 18:20:10 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/28 23:07:49 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,9 @@ static bool			handle_arrow_left_right(int key)
 bool				handle_navigation_keys(int key)
 {
 	return (handle_arrow_left_right(key) || handle_arrow_up_down(key));
+}
+
+bool				handle_special_keys(int key)
+{
+	return (handle_navigation_keys(key) || handle_backspace_key(key));
 }

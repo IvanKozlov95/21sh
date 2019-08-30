@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 03:16:52 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 18:42:33 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/28 23:05:28 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	init_env(void)
 		separator = ft_strchr((const char *)environ[i], '=');
 		*separator = 0;
 		dict_insert(g_env, environ[i], separator + 1);
+		*separator = '=';
 	}
 }

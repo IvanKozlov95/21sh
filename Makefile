@@ -6,7 +6,7 @@
 #    By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/08/28 18:30:51 by batman           ###   ########.fr        #
+#    Updated: 2019/08/28 22:52:46 by batman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,9 +74,6 @@ clean:
 	fi;
 
 fclean: clean
-	@if [ "${LIBS}" ]; then\
-		make -C $(LIBFT_DIR) fclean;\
-	fi;
 	@if test -e $(NAME); then\
 		/bin/rm $(NAME);\
 		/bin/echo "[INFO] $(NAME) executable deleted";\

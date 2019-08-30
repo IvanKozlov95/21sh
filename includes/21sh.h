@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 18:42:39 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/29 10:21:07 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int							unsetenv_21sh(char *name, char **args);
 /*
 **	src/keys
 */
+bool						handle_special_keys(int key);
+bool						handle_backspace_key(int key);
 bool						handle_navigation_keys(int key);
 
 #endif

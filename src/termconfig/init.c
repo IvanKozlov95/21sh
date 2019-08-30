@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:27:50 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 00:14:15 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/29 11:42:05 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		init_terminal_data(void)
 	termtype = getenv("TERM");
 	if (termtype == NULL)
 		fatal(error_default, "Specify a terminal type with\
-`setenv TERM <yourtype>'.\n");
+`setenv TERM <yourtype>`.\n");
 	success = tgetent(buf, termtype);
 	if (success < 0)
 		fatal(error_default, "Could not access the termcap data base.\n");

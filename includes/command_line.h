@@ -6,7 +6,7 @@
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 20:46:36 by batman            #+#    #+#             */
-/*   Updated: 2019/08/27 15:55:03 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/29 10:31:33 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define COMMAND_LINE_H
 
 # include "ft_math.h"
+# include "dstring.h"
 
 struct									s_command_line
 {
-	char		*cmd;
+	t_string	*cmd;
 	t_point		cursor_pos;
 	size_t		prompt_len;
 };

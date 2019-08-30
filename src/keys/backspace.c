@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   backspace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/08 23:41:01 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/28 23:06:05 by batman           ###   ########.fr       */
+/*   Created: 2019/08/28 23:10:14 by batman            #+#    #+#             */
+/*   Updated: 2019/08/29 11:03:27 by batman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include <stdbool.h>
 
-#include "21sh.h"
+#include "keys.h"
+
 #include "command_line.h"
 
-int		main(void)
+static void		delete_one_char(void)
 {
-	init_env();
-	init_termconfig();
-	init_signal_handlers();
-	while (1)
+	string_splice(g_command_line.cmd, g_command_line.cursor_pos.x - 2, 1);
+	move_cursor(-1, 0);
+}
+
+bool			handle_backspace_key(int key)
+{
+	if (key == KBSPACE)
 	{
-		display_prompt();
-		init_command_line();
-		handle_input();
+		delete_one_char();
+		return (true);
 	}
+	return (false);
 }
