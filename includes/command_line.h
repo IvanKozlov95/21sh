@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 20:46:36 by batman            #+#    #+#             */
-/*   Updated: 2019/08/29 10:31:33 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/31 07:00:23 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void									display_cursor(int c);
 void									display_command_line(char *input);
 void									display_current_command(char *input);
 void									init_command_line(void);
+void									clear_current_command(void);
 
 /*
 **	cursor
