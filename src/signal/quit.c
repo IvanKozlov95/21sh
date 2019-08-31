@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 20:40:25 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 12:08:43 by ikozlov          ###   ########.fr       */
+/*   Created: 2019/08/31 11:56:36 by ikozlov           #+#    #+#             */
+/*   Updated: 2019/08/31 12:08:30 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
+#include <stdlib.h>
 
-#include "21sh.h"
+#include "command_line.h"
 
-void		init_signal_handlers(void)
+/*
+** Use the common idiom of 128 + signal number for signal exits.
+** Alternative approach is to reset the signal to default handler,
+** and immediately raise() it.
+** Example:
+** exit(128 + signo);
+*/
+
+void		sigquit_handler(int signo)
 {
-	signal(SIGINT, sigkill_handler);
-	signal(SIGINT, sigquit_handler);
-	signal(SIGABRT, sigquit_handler);
-	signal(SIGSTOP, sigquit_handler);
-	signal(SIGKILL, sigquit_handler);
-	signal(SIGQUIT, sigquit_handler);
+	destroy_command_line();
+	exit(128 +signo);
 }

@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 06:52:59 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/08/31 12:09:33 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void							init_signal_handlers(void);
 */
 
 void							sigkill_handler(int signo);
+void							sigquit_handler(int signo);
 
 /*
 **	src/execute.c
