@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 11:40:12 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/08/31 11:41:05 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void		get_input(void)
 	char		buf[5];
 	int			ret;
 
-	string_destroy(g_command_line.cmd, false);
-	g_command_line.cmd = string_init(0);
 	while (42)
 	{
 		ft_bzero(buf, 5);
@@ -36,7 +34,7 @@ static void		get_input(void)
 		debug("%x %x %x %x\n", buf[0], buf[1], buf[2], buf[4]);
 		if (!handle_special_keys(*(int *)buf))
 		{
-			string_append(g_command_line.cmd, buf);
+			string_appendn(g_command_line.cmd, buf, ret);
 			move_cursor(1, 0);
 		}
 		debug("|%s|\n", g_command_line.cmd->content);
@@ -58,7 +56,9 @@ void			handle_input(void)
 	t_list 		*tkns;
 	t_lexer		*lexer;
 
+	string_init_content(g_command_line.cmd, 0);
 	get_input();
+	command_line_history_add_command(g_command_line.cmd->content);
 	lexer = init_lexer(g_command_line.cmd->content);
 	tkns = get_token_list(lexer);
 	ft_lstiter(tkns, token_debug_info);

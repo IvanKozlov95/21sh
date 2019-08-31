@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 19:00:57 by batman            #+#    #+#             */
-/*   Updated: 2019/08/31 06:56:02 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/08/31 11:36:47 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool			handle_arrow_up_down(int key)
 {
 	if (key == KUP || key == KDOWN)
 	{
-		move_cursor(0, key == KUP ? -1 : 1);
+		command_line_history_move_active(key == KUP ? -1 : 1);
 		return (true);
 	}
 	return (false);
