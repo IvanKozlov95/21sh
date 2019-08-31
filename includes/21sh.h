@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   21sh.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/29 10:21:07 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/31 06:52:59 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int							unsetenv_21sh(char *name, char **args);
 bool						handle_special_keys(int key);
 bool						handle_backspace_key(int key);
 bool						handle_navigation_keys(int key);
+bool						handle_ctrl_d(int key);
 bool						handle_home_key(int key);
 bool						handle_end_key(int key);
 
