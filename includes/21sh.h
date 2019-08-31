@@ -99,4 +99,9 @@ bool						handle_special_keys(int key);
 bool						handle_backspace_key(int key);
 bool						handle_navigation_keys(int key);
 
+/*
+**	debug
+*/
+void	debug(char *fmt, ...);
+
 #endif

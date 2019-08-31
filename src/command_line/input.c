@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/29 11:37:37 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/31 11:40:12 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ static void		get_input(void)
 		ret = read(0, buf, 4);
 		if (buf[0] == '\n')
 			break ;
+		debug("%x %x %x %x\n", buf[0], buf[1], buf[2], buf[4]);
 		if (!handle_special_keys(*(int *)buf))
 		{
 			string_append(g_command_line.cmd, buf);
 			move_cursor(1, 0);
 		}
-		display_current_command(g_command_line.cmd->content);
+		debug("|%s|\n", g_command_line.cmd->content);
+		display_current_command();
 	}
 }
 
