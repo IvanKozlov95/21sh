@@ -98,6 +98,8 @@ int							unsetenv_21sh(char *name, char **args);
 bool						handle_special_keys(int key);
 bool						handle_backspace_key(int key);
 bool						handle_navigation_keys(int key);
+bool						handle_home_key(int key);
+bool						handle_end_key(int key);
 
 /*
 **	debug

@@ -42,6 +42,8 @@ void									init_command_line(void);
 */
 void									move_cursor(int horizontal_delta,
 	int vertical_delta);
+void									move_cursor_home(void);
+void									move_cursor_end(void);
 int										get_cursor_position(t_point *cur_pos);
 
 #endif

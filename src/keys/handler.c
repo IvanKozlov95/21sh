@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 19:00:57 by batman            #+#    #+#             */
-/*   Updated: 2019/08/28 23:07:49 by batman           ###   ########.fr       */
+/*   Updated: 2019/08/31 06:56:02 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 
+#include "21sh.h"
 #include "keys.h"
 #include "libft.h"
 #include "command_line.h"
@@ -43,5 +44,6 @@ bool				handle_navigation_keys(int key)
 
 bool				handle_special_keys(int key)
 {
-	return (handle_navigation_keys(key) || handle_backspace_key(key));
+	return (handle_navigation_keys(key) || handle_backspace_key(key)
+		|| handle_ctrl_d(key) || handle_home_key(key) || handle_end_key(key));
 }
