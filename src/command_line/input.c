@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 11:41:05 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/01 09:36:17 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ static void		get_input(void)
 	{
 		ft_bzero(buf, 5);
 		ret = read(0, buf, 4);
+		if (ret == - 1)
+			continue ;
 		if (buf[0] == '\n')
 			break ;
-		debug("%x %x %x %x\n", buf[0], buf[1], buf[2], buf[4]);
+		debug("ret: %d %x %x %x %x\n",
+			ret, buf[0], buf[1], buf[2], buf[4]);
 		if (!handle_special_keys(*(int *)buf))
 		{
-			string_appendn(g_command_line.cmd, buf, ret);
+			if (!string_insert(g_command_line.cmd, buf,
+				g_command_line.cursor_pos.x - 1))
+					fatal(-1, "Can't update command\n");
 			move_cursor(1, 0);
 		}
 		debug("|%s|\n", g_command_line.cmd->content);
