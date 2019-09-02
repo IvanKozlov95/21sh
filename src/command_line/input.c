@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/01 18:42:15 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/01 22:49:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		get_input(void)
 			if (!string_insert(g_command_line.cmd, buf,
 				g_command_line.cursor_pos.x - g_command_line.prompt_len - 1))
 					fatal(-1, "Can't update command\n");
-			move_cursor(1, 0);
+			move_cursor(ret, 0);
 		}
 		debug("|%s|\n", g_command_line.cmd->content);
 		display_current_command();

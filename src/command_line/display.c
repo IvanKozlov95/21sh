@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 22:23:06 by batman            #+#    #+#             */
-/*   Updated: 2019/08/31 11:01:41 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/01 22:52:46 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ void		clear_current_command(void)
 
 void		display_current_command(void)
 {
-	tputs(tgetstr("cb", NULL), g_termconf.descriptor, ft_putc);
-	tputs(tgetstr("ce", NULL), g_termconf.descriptor, ft_putc);
 	tputs(tgoto(g_termconf.cm,
-		0, g_command_line.cursor_pos.y - 1),
+		g_command_line.prompt_len, g_command_line.cursor_pos.y - 1),
 		g_termconf.descriptor, ft_putc);
-	display_prompt();
+	tputs(tgetstr("ce", NULL), g_termconf.descriptor, ft_putc);
 	ft_printf("%s", g_command_line.cmd->content);
 	tputs(tgoto(g_termconf.cm,
 		g_command_line.cursor_pos.x - 1, g_command_line.cursor_pos.y - 1),
