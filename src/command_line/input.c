@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/01 15:28:25 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/01 18:42:15 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void		get_input(void)
 			ret, buf[0], buf[1], buf[2], buf[4]);
 		if (!handle_special_keys(*(int *)buf))
 		{
+			debug("Inserting at postion %d\n",
+				g_command_line.cursor_pos.x - g_command_line.prompt_len - 1);
 			if (!string_insert(g_command_line.cmd, buf,
 				g_command_line.cursor_pos.x - g_command_line.prompt_len - 1))
 					fatal(-1, "Can't update command\n");
