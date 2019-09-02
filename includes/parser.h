@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 18:38:43 by batman            #+#    #+#             */
-/*   Updated: 2019/08/22 15:11:49 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/01 16:43:2 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "lexer.h"
 #include "btree.h"
+
+extern t_list				*g_current_token_list;
 
 struct						s_astnode
 {
@@ -58,6 +60,11 @@ t_btree_node		*simple_command2(void);
 **	cmd_word
 */
 t_btree_node		*cmd_word(void);
+
+/*
+**	set_op
+*/
+bool				sep_op(void);
 
 /*
 **	helpers

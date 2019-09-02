@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_ast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:23:42 by batman            #+#    #+#             */
-/*   Updated: 2019/08/23 16:20:13 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/01 18:05:22 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 #include "btree.h"
+#include "parser.h"
 #include "shell_command.h"
 
 // todo: static for local func ???
@@ -35,11 +36,20 @@ void		execute_job(t_btree_node *job)
 	execute_cmd(job);
 }
 
-void		execute_program(t_btree_node *program)
+void		execute_program(t_btree_node *program_node)
 {
-	if (!program)
+	t_astnode		*ast_program;
+
+	if (!program_node)
 		return ;
-	execute_job(program);
+	ast_program = program_node->content;
+	if (ast_program == NULL)
+	{
+		execute_program(program_node->left);
+		execute_program(program_node->right);
+	}
+	else
+		execute_job(program_node);
 }
 
 void		execute_ast_tree(t_btree_node *ast)

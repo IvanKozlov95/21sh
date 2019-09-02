@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switch_state.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:10:30 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/23 16:21:59 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/01 18:18:18 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 static void		switch_special_state(t_lexer *l, t_atom_type curr_atom)
 {
+	if (l->special_type == unkn && curr_atom != gnrl)
+		l->special_type = curr_atom;
 	if ((l->special_type == gt || l->special_type == ls)
 		&& l->special_type != curr_atom)
 		l->current_state = fsm_special;
@@ -30,14 +32,12 @@ static void		swtich_inquote_state(t_lexer *l, t_atom_type curr_atom)
 
 static void		switch_general_state(t_lexer *l, t_atom_type curr_atom)
 {
-	if (curr_atom == whitespc || curr_atom != gnrl)
+	if (curr_atom != gnrl)
 		l->current_state = fsm_end;
 }
 
 static void		switch_start_state(t_lexer *l, t_atom_type curr_atom)
 {
-	if (curr_atom == whitespc || curr_atom == ttab)
-		return ;
 	if (curr_atom == quote || curr_atom == dquote
 		|| curr_atom == bquote)
 	{
@@ -46,13 +46,10 @@ static void		switch_start_state(t_lexer *l, t_atom_type curr_atom)
 	}
 	else if (curr_atom == gnrl)
 		l->current_state = fsm_general;
-	else if (curr_atom == whitespc)
-		l->current_state = fsm_end;
+	else if (curr_atom == whitespc || curr_atom == ttab)
+		l->current_state = fsm_start;
 	else if (curr_atom != gnrl)
-	{
-		l->special_type = curr_atom;
-		l->current_state = fsm_special;
-	}
+		switch_special_state(l, curr_atom);
 }
 
 void			switch_state(t_lexer *l, t_atom_type curr_atom)

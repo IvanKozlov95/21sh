@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/01 09:36:17 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/01 15:28:25 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			token_debug_info(t_list *elem)
 	t_token		*token;
 
 	token = elem->content;
-	ft_printf("token: |%s| type: %d\n",
+	debug("token: |%s| type: %d\n",
 		token->value, token->type);
 }
 

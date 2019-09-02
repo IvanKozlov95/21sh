@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   next_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:38:36 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/23 16:21:54 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/01 18:17:49 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,23 @@ static t_atom_type		get_atom_type(int ch)
 	return (ascii_lookup[ch]);
 }
 
-static bool		is_valid_atom(int atom)
+static bool		should_move_to_next_atom(t_lexer *l, t_atom_type curr_atom)
 {
-	t_atom_type		type;
-
-	type = get_atom_type(atom);
-	if (type == unkn)
-		set_error(error_unkn_atom, "Unexpected symbol '%c'\n", atom);
-	return (type != unkn);
+	if (curr_atom == whitespc || curr_atom == ttab)
+		return (true);
+	if (l->current_state == fsm_end)
+		return (curr_atom == whitespc || curr_atom == ttab
+			|| l->special_type != unkn);
+	return (l->current_state != fsm_end);
 }
 
 static bool		should_add_atom(t_lexer *l, t_atom_type curr_atom)
 {
 	if (l->quote_type != unkn)
 		return (curr_atom == l->quote_type ? false : true);
-	return (curr_atom != whitespc && curr_atom != ttab);
+	if (l->current_state == fsm_end)
+		return (l->special_type != unkn);
+	return (l->current_state != fsm_end && l->current_state != fsm_start);
 }
 
 static char		*build_lexeme(t_lexer *lexer)
@@ -76,7 +78,8 @@ static char		*build_lexeme(t_lexer *lexer)
 		switch_state(lexer, curr_atom_type);
 		if (should_add_atom(lexer, curr_atom_type))
 			string_appendn(lexeme, lexer->input, 1);
-		lexer->input++;
+		if (should_move_to_next_atom(lexer, curr_atom_type))
+			lexer->input++;
 	}
 	return (string_destroy(lexeme, lexer->current_state != fsm_error));
 }
