@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 22:32:48 by batman            #+#    #+#             */
-/*   Updated: 2019/08/31 06:59:23 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/01 18:43:29 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,18 @@ static void			move_cursor_pos(int x, int y)
 		g_termconf.descriptor, ft_putc);
 }
 
+/*
+**	Moves cursor by deltas on x and/or y axises.
+**
+**	NB! cursor x positon cannot be less or equal to a prompt length + 1
+**	Add one because cursor is off by one on both axises
+*/
+
 void				move_cursor(int horizontal_delta, int vertical_delta)
 {
 	g_command_line.cursor_pos.x += horizontal_delta;
-	g_command_line.cursor_pos.x = g_command_line.cursor_pos.x < 0
-		? 0 : g_command_line.cursor_pos.x;
+	if (g_command_line.cursor_pos.x <= g_command_line.prompt_len + 1)
+		g_command_line.cursor_pos.x = g_command_line.prompt_len + 1;
 	g_command_line.cursor_pos.y += vertical_delta;
 	g_command_line.cursor_pos.y = g_command_line.cursor_pos.y < 0
 		? 0 : g_command_line.cursor_pos.y;
@@ -70,6 +77,7 @@ int					get_cursor_position(t_point *cur_pos)
 		i++;
 	cur_pos->y = ft_atoi(buf + i);
 	cur_pos->x = ft_atoi(buf + ft_strchri(buf, ';') + 1);
+	debug("cursor positon: x %d y %d\n", cur_pos->x, cur_pos->y);
 	return (0);
 }
 

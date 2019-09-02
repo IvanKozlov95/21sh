@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backspace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 23:10:14 by batman            #+#    #+#             */
-/*   Updated: 2019/08/29 11:03:27 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/01 18:35:31 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,17 @@
 
 #include "command_line.h"
 
+/*
+**	Deletes one character from cursor positon.
+**	Substract prompt_len because prompt is not a part of a command.
+**	Substract one because real cursor position is off by one on both axises.
+**	Substract one because god knows.
+*/
+
 static void		delete_one_char(void)
 {
-	string_splice(g_command_line.cmd, g_command_line.cursor_pos.x - 2, 1);
+	string_splice(g_command_line.cmd,
+		g_command_line.cursor_pos.x - g_command_line.prompt_len - 2, 1);
 	move_cursor(-1, 0);
 }
 

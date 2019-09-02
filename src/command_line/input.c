@@ -38,7 +38,7 @@ static void		get_input(void)
 		if (!handle_special_keys(*(int *)buf))
 		{
 			if (!string_insert(g_command_line.cmd, buf,
-				g_command_line.cursor_pos.x - 1))
+				g_command_line.cursor_pos.x - g_command_line.prompt_len - 1))
 					fatal(-1, "Can't update command\n");
 			move_cursor(1, 0);
 		}

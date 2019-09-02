@@ -24,10 +24,6 @@ void	display_prompt(void)
 	char		cwd[2048 + 1];
 
 	getcwd(cwd, 2048);
-	g_command_line.prompt_len = 0;
-	// get_cursor_position(&cursor);
-	// g_command_line.prompt_len =
-		// ft_printf("%s%s%s %d %d > ", BLU, cwd, RESET, cursor.x, cursor.y) - 10;
-		// ft_printf("%2d %2d > ", cursor.x, cursor.y);
-		// ft_printf("", cursor.x, cursor.y);
+	g_command_line.prompt_len =ft_printf("%s%s%s > ", BLU, cwd, RESET)
+		- ft_strlen(BLU) - ft_strlen(RESET);
 }
