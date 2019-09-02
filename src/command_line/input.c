@@ -45,6 +45,7 @@ static void		get_input(void)
 		debug("|%s|\n", g_command_line.cmd->content);
 		display_current_command();
 	}
+	ft_printf("\n");
 }
 
 void			token_debug_info(t_list *elem)
