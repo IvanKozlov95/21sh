@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 12:09:33 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/02 23:40:08 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ bool						handle_end_key(int key);
 /*
 **	debug
 */
+# include "list.h"
 void	debug(char *fmt, ...);
+void	token_debug_info(t_list *elem);
 
 #endif

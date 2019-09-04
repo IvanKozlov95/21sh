@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:30:28 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/22 15:07:51 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/03 19:33:14 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
 #include "memory.h"
+
+#include "21sh.h"
+#include "lexer.h"
+
+void			token_debug_info(t_list *elem)
+{
+	t_token		*token;
+
+	token = elem->content;
+	debug("token: |%s| type: %d\n",
+		token->value, token->type);
+}
 
 t_token				*create_token(t_lexer *l, char *value)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/01 22:49:48 by marvin           ###   ########.fr       */
+/*   Updated: 2019/09/02 23:38:55 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,6 @@ static void		get_input(void)
 		display_current_command();
 	}
 	ft_printf("\n");
-}
-
-void			token_debug_info(t_list *elem)
-{
-	t_token		*token;
-
-	token = elem->content;
-	debug("token: |%s| type: %d\n",
-		token->value, token->type);
 }
 
 void			handle_input(void)
