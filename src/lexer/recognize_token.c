@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:14:28 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/03 00:30:01 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/04 01:48:26 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ t_token					*recognize_token(t_lexer *lexer)
 	while (lexer->current_state != state_end)
 	{
 		rules_response = apply_rules(lexer, get_atom_type(*lexer->input));
-		if (rules_response & RULE_END_TOKEN && lexeme->length > 0)
-			break ;
 		if (rules_response & RULE_ADD_ATOM)
 			string_appendn(lexeme, lexer->input, 1);
 		if (rules_response & RULE_MOVE_ATOM)
 			lexer->input++;
+		if (rules_response & RULE_END_TOKEN && lexeme->length > 0)
+			break ;
 		if (rules_response == 0)
 		{
 			debug("Unexpected atom %c\n", *lexer->input);
