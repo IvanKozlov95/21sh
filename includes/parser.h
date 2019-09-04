@@ -24,6 +24,8 @@ struct						s_astnode
 };
 typedef struct s_astnode	t_astnode;
 
+typedef char				*(*t_expantion)(char **);
+
 /*
 **	program
 */
@@ -79,6 +81,15 @@ t_btree_node		*save_curr_token_wrapper(t_btree_node *(f)(void));
 **	parse
 */
 t_btree_node		*parse(t_list *tokenlist);
+
+/*
+**	parser/expantions
+*/
+char				*expand_token(char *token);
+char				*apply_expantion(char **token_ptr, t_expantion expantions[],
+	bool (*stop_condition)(char c));
+char				*double_quote_expantion(char **quote_ptr);
+char				*single_quote_expantion(char **quoute_ptr);
 
 /*
 **	ast

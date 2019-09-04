@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:14:28 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 01:48:26 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/04 05:32:52 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "21sh.h"
 #include "lexer.h"
 
-static t_atom_type		get_atom_type(int ch)
+t_atom_type		get_atom_type(int ch)
 {
 	static bool				initialized = false;
 	static t_atom_type		ascii_lookup[128] = { gnrl };
@@ -27,7 +27,7 @@ static t_atom_type		get_atom_type(int ch)
 		ascii_lookup['$'] = dollar;
 		ascii_lookup['|'] = ppipe;
 		ascii_lookup['&'] = apsd;
-		ascii_lookup['\''] = quote;
+		ascii_lookup['\''] = squote;
 		ascii_lookup['"'] = dquote;
 		ascii_lookup['`'] = bquote;
 		ascii_lookup[';'] = smcln;

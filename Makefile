@@ -6,7 +6,7 @@
 #    By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/09/02 23:33:48 by ikozlov          ###   ########.fr        #
+#    Updated: 2019/09/04 03:31:08 by ikozlov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)lexer/
 	mkdir -p $(OBJ_DIR)lexer/rules
 	mkdir -p $(OBJ_DIR)parser/
+	mkdir -p $(OBJ_DIR)parser/expantions
 	mkdir -p $(OBJ_DIR)executor/
 	mkdir -p $(OBJ_DIR)builtins/
 	mkdir -p $(OBJ_DIR)keys/

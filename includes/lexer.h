@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:42:57 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/03 00:29:38 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/04 05:04:27 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ enum						e_atom_type
 {
 	unkn = -1,
 	gnrl = 0,
+	squote,
+	dquote,
+	blank,
 	dollar,
+	apsd,
 	hash,
 	ppipe,
-	apsd,
-	quote,
-	dquote,
 	bquote,
 	smcln,
-	blank,
 	nl,
 	gt,
 	ls,
@@ -106,6 +106,7 @@ t_list						*get_token_list(t_lexer *lexer);
 **	src/lexer/recognize_token.c
 */
 
+t_atom_type					get_atom_type(int ch);
 t_token						*recognize_token(t_lexer *lexer);
 
 /*
