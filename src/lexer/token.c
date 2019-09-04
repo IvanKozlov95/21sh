@@ -13,17 +13,13 @@
 #include "lexer.h"
 #include "memory.h"
 
-t_token		*create_token(t_lexer *l, char *value)
+t_token				*create_token(t_lexer *l, char *value)
 {
 	t_token		*ret;
 
 	ret = ft_memalloc(sizeof(t_token));
 	ret->value = value;
-	ret->type = gnrl;
-	if (l->quote_type != unkn)
-		ret->type = l->quote_type;
-	if (l->special_type != unkn)
-		ret->type = l->special_type;
+	ret->type = l->op_type != unkn ? token_op : token_word;
 	return (ret);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+         #
+#    By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/08 23:39:38 by ivankozlov        #+#    #+#              #
-#    Updated: 2019/08/28 22:52:46 by batman           ###   ########.fr        #
+#    Updated: 2019/09/02 23:33:48 by ikozlov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ LIBFT_DIR = libft/
 # files
 SRC := $(wildcard $(SRC_DIR)*.c)
 SRC += $(wildcard $(SRC_DIR)**/*.c)
+SRC += $(wildcard $(SRC_DIR)/**/**/*.c)
 OBJ := $(SRC:$(SRC_DIR)%=%)
 OBJ := $(patsubst %, $(OBJ_DIR)%, $(OBJ:.c=.o))
 
@@ -54,6 +55,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)termconfig/
 	mkdir -p $(OBJ_DIR)signal/
 	mkdir -p $(OBJ_DIR)lexer/
+	mkdir -p $(OBJ_DIR)lexer/rules
 	mkdir -p $(OBJ_DIR)parser/
 	mkdir -p $(OBJ_DIR)executor/
 	mkdir -p $(OBJ_DIR)builtins/

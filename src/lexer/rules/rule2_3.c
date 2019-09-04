@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   rule2_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 08:42:13 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/02 23:48:07 by ikozlov          ###   ########.fr       */
+/*   Created: 2019/09/02 18:07:17 by ikozlov           #+#    #+#             */
+/*   Updated: 2019/09/03 19:28:04 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-void			lexer_default_state(t_lexer *lexer)
+int		rule_2_3(t_lexer *l, t_atom_type cur_atom_type)
 {
-	lexer->current_state = state_start;
-	lexer->op_type = unkn;
-	lexer->quote_type = unkn;
-}
-
-t_lexer			*init_lexer(char *input)
-{
-	static t_lexer		lexer;
-
-	lexer_default_state(&lexer);
-	lexer.input = input;
-	return (&lexer);
+	if (l->current_state == state_op)
+	{
+		if (l->op_type == cur_atom_type)
+			return (RULE_ADD_ATOM | RULE_MOVE_ATOM);
+		else
+			return (RULE_END_TOKEN | RULE_ADD_ATOM | RULE_ADD_ATOM);
+	}
+	return (RULE_NO_APPLY);
 }
