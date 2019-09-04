@@ -70,7 +70,8 @@ bool				sep_op(void);
 **	helpers
 */
 t_token				*curr_token(void);
-bool				assert_token_type(t_atom_type type);
+bool				assert_token_type(t_token_type expected_type,
+	const char expected_value[]);
 t_btree_node		*create_node_from_current_token(void);
 t_btree_node		*save_curr_token_wrapper(t_btree_node *(f)(void));
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 12:50:12 by batman            #+#    #+#             */
-/*   Updated: 2019/08/22 14:52:11 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/03 00:00:19 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_btree_node		*pipeline1(void)
 	simple_command_node1 = save_curr_token_wrapper(simple_command);
 	if (!simple_command_node1)
 		return (NULL);
-	if (!assert_token_type(ppipe) ||
+	if (!assert_token_type(token_op, "|") ||
 		(simple_command_node2 = save_curr_token_wrapper(simple_command)) == NULL)
 	{
 		free_node(simple_command_node1, delete_ast_node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:03:32 by batman            #+#    #+#             */
-/*   Updated: 2019/08/22 15:04:38 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/02 23:59:20 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 t_token		*g_l;
 t_list		*g_current_token_list;
 
-bool				assert_token_type(t_atom_type type)
+bool				assert_token_type(t_token_type expected_type,
+	const char expected_value[])
 {
+	bool		type_macth;
+	bool		value_match;
+
 	if (g_current_token_list == NULL)
 		return (false);
-	return (curr_token()->type == type);
+	type_macth = curr_token()->type == expected_type;
+	value_match = expected_value
+		? ft_strequ(curr_token()->value, expected_value) : true;
+	return (type_macth && value_match);
 }
 
 t_token				*curr_token(void)
