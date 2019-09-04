@@ -88,6 +88,7 @@ t_btree_node		*parse(t_list *tokenlist);
 char				*expand_token(char *token);
 char				*apply_expantion(char **token_ptr, t_expantion expantions[],
 	bool (*stop_condition)(char c));
+char				*argument_expantion(char **token_ptr);
 char				*double_quote_expantion(char **quote_ptr);
 char				*single_quote_expantion(char **quoute_ptr);
 
