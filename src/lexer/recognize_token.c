@@ -59,7 +59,11 @@ static int				apply_rules(t_lexer *lexer, t_atom_type cur_atom_type)
 	{
 		result = rules[i](lexer, cur_atom_type);
 		if (result != 0)
+		{
+			debug("char %c applied rule #%d with result %d\n",
+				*lexer->input, i, result);
 			return (result);
+		}
 	}
 	return (result);
 }
