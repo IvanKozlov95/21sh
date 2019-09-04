@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/08/22 21:37:14 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/04 13:35:21 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void				execute_shell_command(t_shell_command *command)
 	char	*path;
 	int		status;
 
-	path = get_path(command->argv[0]);
-	if (!path)
+	if (ft_strlen(command->argv[0]) == 0)
 		return ;
+	path = get_path(command->argv[0]);
 	pid = fork();
 	if (pid < 0)
 		fatal(-1, "fork failed\n");
