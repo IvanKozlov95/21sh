@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 02:41:02 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/23 15:44:17 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/06 05:24:03 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static char		*get_path(char **args)
 	char	*oldpwd;
 
 	ret = *args;
-	home = dict_find(g_env, HOME);
-	oldpwd = dict_find(g_env, OLDPWD);
+	home = dict_find(g_env, HOME, false);
+	oldpwd = dict_find(g_env, OLDPWD, false);
 	if (!ret || ft_strequ(ret, CDHOME) || ft_strequ(ret, CDHOME2))
 		ret = home;
 	else if (ft_strequ(ret, CDOLDPWD))

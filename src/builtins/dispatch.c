@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dispatch.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 15:59:09 by batman            #+#    #+#             */
-/*   Updated: 2019/08/23 16:19:15 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/04 13:45:22 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ t_builtin_func	get_builtin_func(char *name)
 		(t_dict_pair){ .key = "unsetenv", .val = unsetenv_21sh } };
 	static t_dict		disp = { .count = 6, .capacity = 6, .values = funcs };
 
-	return (dict_find(&disp, name));
+	return (dict_find(&disp, name, false));
 }

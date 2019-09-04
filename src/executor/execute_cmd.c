@@ -29,7 +29,7 @@ static char		*find_cmd_path(char *cmd_name, struct stat *f)
 	char			*tmp;
 	char			*path_var;
 
-	path_var = dict_find(g_env, "PATH");
+	path_var = dict_find(g_env, "PATH", false);
 	if (!path_var)
 		return (NULL);
 	paths = ft_strsplit(path_var, ':');
