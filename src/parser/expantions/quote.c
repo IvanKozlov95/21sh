@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 01:57:08 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 05:04:33 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/04 13:00:50 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,20 @@
 #include "lexer.h"
 #include "parser.h"
 
-char	*single_quote_expantion(char **quoute_ptr)
+static bool		single_quote_stop_condtion(char current)
 {
-	fatal(EXIT_SIGNAL, "signle quote expantion is not implemented yet\n");
-	return (NULL);
+	return (current == '\'');
+}
+
+char	*single_quote_expantion(char **qoute_ptr)
+{
+	static t_expantion		quote_expantions[] = {
+		NULL, NULL, double_quote_expantion, NULL,
+	};
+
+	(*qoute_ptr)++;
+	return (apply_expantion(qoute_ptr,
+		quote_expantions, single_quote_stop_condtion));
 }
 
 static bool		double_quote_stop_condtion(char current)
