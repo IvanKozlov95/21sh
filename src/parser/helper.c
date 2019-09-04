@@ -6,9 +6,11 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:03:32 by batman            #+#    #+#             */
-/*   Updated: 2019/09/04 05:36:47 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/04 12:59:47 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ftstring.h"
 
 #include "21sh.h"
 #include "parser.h"
