@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_command.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: batman <ikozlov@student.42.us.org>         +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:31:34 by batman            #+#    #+#             */
-/*   Updated: 2019/08/22 18:08:16 by batman           ###   ########.fr       */
+/*   Updated: 2019/09/06 05:00:52 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ struct								s_shell_command
 {
 	int			argc;
 	char		**argv;
+	int			pipe_in;
+	int			pipe_out;
 };
 
 typedef struct s_shell_command		t_shell_command;

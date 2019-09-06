@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:03:32 by batman            #+#    #+#             */
-/*   Updated: 2019/09/04 12:59:47 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/06 05:40:48 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_token				*curr_token(void)
 	return (g_current_token_list->content);
 }
 
-t_btree_node		*create_node_from_current_token(void)
+t_btree_node		*create_node_from_current_token(bool expand,
+	t_astnode_type type)
 {
 	t_btree_node	*node;
 	t_token			*token;
@@ -50,12 +51,14 @@ t_btree_node		*create_node_from_current_token(void)
 	token = curr_token();
 	if (token)
 	{
-		expanded_token = expand_token(token->value);
-		debug("token |%s| - expanded |%s|\n", token->value, expanded_token);
-		astnode = create_ast_node(expanded_token);
+		expanded_token = expand ? expand_token(token->value) : token->value;
+		if (expand)
+			debug("token |%s| - expanded |%s|\n", token->value, expanded_token);
+		astnode = create_ast_node(expanded_token, type);
 		node = new_btree_node(astnode, sizeof(t_astnode));
 		g_current_token_list = g_current_token_list->next;
-		ft_free(1, expanded_token);
+		if (expand)
+			ft_free(1, expanded_token);
 	}
 	return (node);
 }

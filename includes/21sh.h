@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/02 23:40:08 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/06 05:05:58 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <term.h>
 # include <termcap.h>
+# include <errno.h>
 
 # include "btree.h"
 # include "dictionary.h"

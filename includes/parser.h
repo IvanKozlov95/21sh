@@ -18,8 +18,17 @@
 
 extern t_list				*g_current_token_list;
 
+enum						e_astnode_type
+{
+	ast_cmd = 0,
+	ast_pipe,
+};
+
+typedef enum e_astnode_type	t_astnode_type;
+
 struct						s_astnode
 {
+	t_astnode_type	type;
 	char			*value;
 };
 typedef struct s_astnode	t_astnode;
@@ -74,7 +83,8 @@ bool				sep_op(void);
 t_token				*curr_token(void);
 bool				assert_token_type(t_token_type expected_type,
 	const char expected_value[]);
-t_btree_node		*create_node_from_current_token(void);
+t_btree_node		*create_node_from_current_token(bool expand,
+	t_astnode_type type);
 t_btree_node		*save_curr_token_wrapper(t_btree_node *(f)(void));
 
 /*
@@ -95,7 +105,7 @@ char				*single_quote_expantion(char **quoute_ptr);
 /*
 **	ast
 */
-t_astnode			*create_ast_node(char *value);
+t_astnode			*create_ast_node(char *value, t_astnode_type type);
 void				delete_ast_node(void *node, size_t size);
 
 #endif

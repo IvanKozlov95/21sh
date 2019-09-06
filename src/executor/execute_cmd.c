@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/04 13:35:21 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/06 05:18:21 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,19 @@ static char			*get_path(char *cmd_name)
 	return (can_execute ? path : NULL);
 }
 
+static void			duplicate_fd_if_present(int newfd, int oldfd)
+{
+	if (newfd)
+		dup2(newfd, oldfd);
+}
+
 void				execute_shell_command(t_shell_command *command)
 {
 	pid_t	pid;
 	char	*path;
 	int		status;
 
+	int stdoutfd = dup(STDOUT_FILENO);
 	if (ft_strlen(command->argv[0]) == 0)
 		return ;
 	path = get_path(command->argv[0]);
@@ -81,8 +88,13 @@ void				execute_shell_command(t_shell_command *command)
 	if (pid < 0)
 		fatal(-1, "fork failed\n");
 	if (pid == 0)
+	{
+		duplicate_fd_if_present(command->pipe_in, STDIN_FILENO);
+		duplicate_fd_if_present(command->pipe_out, STDOUT_FILENO);
 		// todo: add env
 		execve(path, command->argv, NULL);
+		// show error message but restore a stdout first
+	}
 	else
 		wait(&status);
 }
