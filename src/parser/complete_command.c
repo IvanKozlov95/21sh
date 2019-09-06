@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 18:37:42 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/03 00:02:44 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/04 14:43:08 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_btree_node		*complete_command2(void)
 	if (!list_node)
 		return (NULL);
 	// todo: other separator ops
-	if (sep_op())
+	if (!sep_op())
 	{
 		free_node(list_node, delete_ast_node);
 		return (NULL);
