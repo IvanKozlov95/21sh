@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/07 21:34:03 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/07 23:17:30 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void				execute_shell_command(t_shell_command *command)
 		fatal(-1, "fork failed\n");
 	if (pid == 0)
 	{
-		duplicate_fd_if_present(command->pipe_in, STDIN_FILENO);
-		duplicate_fd_if_present(command->pipe_out, STDOUT_FILENO);
+		duplicate_fd_if_present(command->pipe.in, STDIN_FILENO);
+		duplicate_fd_if_present(command->pipe.out, STDOUT_FILENO);
 		execve_wrapper(path, command);
 		// show error message but restore a stdout first
 	}
