@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:31:34 by batman            #+#    #+#             */
-/*   Updated: 2019/09/06 05:00:52 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/07 21:33:13 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_shell_command		*create_shell_command(t_btree_node *cmd_node);
 void				delete_shell_command(t_shell_command *command);
 
 /*
-**	src/shell_command/delete.c
+**	src/shell_command/execute_cmd.c
 */
+void				execve_wrapper(char *path, t_shell_command *cmd);
 void				execute_shell_command(t_shell_command *command);

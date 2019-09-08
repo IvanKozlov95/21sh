@@ -6,12 +6,11 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/06 05:18:21 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/07 21:34:03 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 
@@ -91,8 +90,7 @@ void				execute_shell_command(t_shell_command *command)
 	{
 		duplicate_fd_if_present(command->pipe_in, STDIN_FILENO);
 		duplicate_fd_if_present(command->pipe_out, STDOUT_FILENO);
-		// todo: add env
-		execve(path, command->argv, NULL);
+		execve_wrapper(path, command);
 		// show error message but restore a stdout first
 	}
 	else
