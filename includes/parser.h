@@ -13,8 +13,15 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "lexer.h"
-#include "btree.h"
+# include "lexer.h"
+# include "btree.h"
+
+/*
+**	Converts t_btree node's content to t_astnode pointer
+**	and makes my life a bit easier :)
+*/
+
+# define GETAST(n) ((t_astnode *)((n)->content))
 
 extern t_list				*g_current_token_list;
 
