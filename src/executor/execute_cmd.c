@@ -6,11 +6,13 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/07 23:17:30 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 04:18:58 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 
@@ -73,13 +75,29 @@ static void			duplicate_fd_if_present(int newfd, int oldfd)
 		dup2(newfd, oldfd);
 }
 
+static void			prepare_redirect_out(t_shell_command *command)
+{
+	int		fd;
+
+	if (command->redirect_out == NULL)
+		return ;
+	fd = open(command->redirect_out, O_WRONLY | O_CREAT | O_TRUNC,
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	debug("redirect out fd is %d\n", fd);
+	if (fd < 0) {
+		// perror(command->redirect_out);
+		fatal(-1, "Remove fatal! Could not open file for redirect out\n");
+	}
+	command->redirect.out = fd;
+	dup2(fd, STDOUT_FILENO);
+}
+
 void				execute_shell_command(t_shell_command *command)
 {
 	pid_t	pid;
 	char	*path;
 	int		status;
 
-	int stdoutfd = dup(STDOUT_FILENO);
 	if (ft_strlen(command->argv[0]) == 0)
 		return ;
 	path = get_path(command->argv[0]);
@@ -90,6 +108,7 @@ void				execute_shell_command(t_shell_command *command)
 	{
 		duplicate_fd_if_present(command->pipe.in, STDIN_FILENO);
 		duplicate_fd_if_present(command->pipe.out, STDOUT_FILENO);
+		prepare_redirect_out(command);
 		execve_wrapper(path, command);
 		// show error message but restore a stdout first
 	}

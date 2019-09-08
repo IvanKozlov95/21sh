@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:31:34 by batman            #+#    #+#             */
-/*   Updated: 2019/09/07 23:23:52 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 03:38:16 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ struct								s_shell_command
 	char		**argv;
 	t_innout	pipe;
 	t_innout	redirect;
+	char		*redirect_in;
+	char		*redirect_out;
 };
 
 typedef struct s_shell_command		t_shell_command;
@@ -38,8 +40,8 @@ typedef struct s_shell_command		t_shell_command;
 /*
 **	src/shell_command/create.c
 */
-t_shell_command		*create_shell_command(t_btree_node *cmd_node,
-	t_innout pipe, t_innout redirect);
+t_shell_command		*create_shell_command(t_btree_node *cmd_node, t_innout pipe,
+	char *redirect_in, char *redirect_out);
 
 /*
 **	src/shell_command/delete.c

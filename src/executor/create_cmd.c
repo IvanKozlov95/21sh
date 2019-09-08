@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:34:00 by batman            #+#    #+#             */
-/*   Updated: 2019/09/07 23:26:04 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 03:49:17 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ static void			build_arg_list(t_btree_node *cmd_node, t_shell_command *command)
 	}
 }
 
-t_shell_command		*create_shell_command(t_btree_node *cmd_node,
-	t_innout pipe, t_innout redirect)
+t_shell_command		*create_shell_command(t_btree_node *cmd_node, t_innout pipe,
+	char *redirect_in, char *redirect_out)
 {
 	t_shell_command		*command;
 
 	command = ft_memalloc(sizeof(t_shell_command));
 	command->pipe = pipe;
-	command->redirect = redirect;
+	command->redirect_in = redirect_in;
+	command->redirect_out = redirect_out;
 	build_arg_list(cmd_node, command);
 	return (command);
 }

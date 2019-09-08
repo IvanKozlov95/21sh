@@ -29,6 +29,8 @@ enum						e_astnode_type
 {
 	ast_cmd = 0,
 	ast_pipe,
+	ast_redirect_in,
+	ast_redirect_out,
 };
 
 typedef enum e_astnode_type	t_astnode_type;
@@ -83,6 +85,11 @@ t_btree_node		*cmd_word(void);
 **	set_op
 */
 bool				sep_op(void);
+
+/*
+**	cmd_suffix
+*/
+t_btree_node		*cmd_suffix(void);
 
 /*
 **	helpers
