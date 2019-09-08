@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 04:18:58 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 04:27:11 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,22 @@ static void			prepare_redirect_out(t_shell_command *command)
 	dup2(fd, STDOUT_FILENO);
 }
 
+static void			prepare_redirect_in(t_shell_command *command)
+{
+	int		fd;
+
+	if (command->redirect_in == NULL)
+		return ;
+	fd = open(command->redirect_in, O_RDONLY);
+	debug("redirect in fd is %d\n", fd);
+	if (fd < 0) {
+		// perror(command->redirect_out);
+		fatal(-1, "Remove fatal! Could not open file for redirect in\n");
+	}
+	command->redirect.in = fd;
+	dup2(fd, STDIN_FILENO);
+}
+
 void				execute_shell_command(t_shell_command *command)
 {
 	pid_t	pid;
@@ -108,6 +124,7 @@ void				execute_shell_command(t_shell_command *command)
 	{
 		duplicate_fd_if_present(command->pipe.in, STDIN_FILENO);
 		duplicate_fd_if_present(command->pipe.out, STDOUT_FILENO);
+		prepare_redirect_in(command);
 		prepare_redirect_out(command);
 		execve_wrapper(path, command);
 		// show error message but restore a stdout first

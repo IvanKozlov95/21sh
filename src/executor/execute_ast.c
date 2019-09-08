@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:23:42 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 03:50:45 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 04:25:03 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		execute_redirect(t_btree_node *command_node)
 	if (redirect->type == ast_redirect_out)
 		execute_cmd(command_node, empty_innout(), NULL, redirect->value);
 	else if (redirect->type == ast_redirect_in)
-		fatal(-1, "Redirect in is not yet implemented\n");
+		execute_cmd(command_node, empty_innout(), redirect->value, NULL);
 	command_node->right = redirect_node;
 }
 
@@ -58,7 +58,8 @@ void		execute_job(t_btree_node *job)
 void		execute_simple_command(t_btree_node *command_node)
 {
 	if (command_node->right
-		&& GETAST(command_node->right)->type == ast_redirect_out)
+		&& (((GETAST(command_node->right)->type == ast_redirect_out))
+		||((GETAST(command_node->right)->type == ast_redirect_in))))
 		execute_redirect(command_node);
 	else
 		execute_job(command_node);
