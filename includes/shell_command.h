@@ -6,12 +6,14 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:31:34 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 03:38:16 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 10:54:00 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_COMMAND_H
 # define SHELL_COMMAND_H
+
+#include <stdbool.h>
 
 #include "btree.h"
 
@@ -31,6 +33,7 @@ struct								s_shell_command
 	t_innout	redirect;
 	char		*redirect_in;
 	char		*redirect_out;
+	bool		save_redirect_out_content;
 };
 
 typedef struct s_shell_command		t_shell_command;

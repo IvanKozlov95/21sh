@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 04:27:11 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 11:32:19 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,13 @@ static void			duplicate_fd_if_present(int newfd, int oldfd)
 static void			prepare_redirect_out(t_shell_command *command)
 {
 	int		fd;
+	int		open_flags;
 
+	open_flags = O_WRONLY | O_CREAT;
+	open_flags |= command->save_redirect_out_content ? O_APPEND : O_TRUNC;
 	if (command->redirect_out == NULL)
 		return ;
-	fd = open(command->redirect_out, O_WRONLY | O_CREAT | O_TRUNC,
+	fd = open(command->redirect_out, open_flags,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	debug("redirect out fd is %d\n", fd);
 	if (fd < 0) {

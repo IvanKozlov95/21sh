@@ -31,6 +31,7 @@ enum						e_astnode_type
 	ast_pipe,
 	ast_redirect_in,
 	ast_redirect_out,
+	ast_redirect_out_save_content,
 };
 
 typedef enum e_astnode_type	t_astnode_type;
@@ -90,6 +91,13 @@ bool				sep_op(void);
 **	cmd_suffix
 */
 t_btree_node		*cmd_suffix(void);
+
+/*
+**	io_file
+*/
+
+t_btree_node		*io_redirect_in(void);
+t_btree_node		*io_redirect_out(void);
 
 /*
 **	helpers
