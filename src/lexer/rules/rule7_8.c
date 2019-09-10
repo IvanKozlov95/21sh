@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:53:51 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/03 00:21:36 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 03:06:53 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		rule_7_8(t_lexer *l, t_atom_type cur_atom_type)
 	if (cur_atom_type == nl || cur_atom_type == blank)
 	{
 		if (l->current_state != state_start)
-			l->current_state = state_end;
+			l->current_state = state_delim_token;
 		return (RULE_MOVE_ATOM);
 	}
 	return (RULE_NO_APPLY);

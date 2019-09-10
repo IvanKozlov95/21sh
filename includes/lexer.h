@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:42:57 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/04 05:04:27 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:07:25 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define LEXER_H
 
 # include "list.h"
+# include "dstring.h"
 
 # define RULE_NO_APPLY 0
 # define RULE_ADD_ATOM 1
 # define RULE_MOVE_ATOM 1 << 1
-# define RULE_END_TOKEN 1 << 2
+# define RULE_END_INPUT 1 << 2
 # define RULE_NO_ACTION 1 << 3
 
 enum						e_fsm_state
@@ -29,7 +30,9 @@ enum						e_fsm_state
 	state_quote,
 	state_comment,
 	state_expansion,
+	state_delim_token,
 	state_end,
+	state_error,
 	fsm_states_count,
 };
 typedef enum e_fsm_state	t_fsm_state;
@@ -64,6 +67,8 @@ enum						e_token_type
 };
 typedef enum e_token_type	t_token_type;
 
+# define IS_EOI_TOKEN(l) ((l) && ((t_token *)(l)->content)->type != token_eoi)
+
 struct						s_token
 {
 	t_token_type			type;
@@ -75,6 +80,7 @@ struct						s_lexer
 {
 	t_fsm_state				current_state;
 	char					*input;
+	t_string				*lexeme;
 	t_atom_type				quote_type;
 	t_atom_type				op_type;
 };
@@ -86,8 +92,9 @@ typedef int					(*t_lexer_rule)(t_lexer *, t_atom_type);
 **	src/lexer/init.c
 */
 
-t_lexer						*init_lexer(char *input);
+t_lexer						*init_lexer(void);
 void						lexer_default_state(t_lexer *lexer);
+void						lexer_default_state_step(t_lexer *lexer);
 
 /*
 **	src/lexer/token.c
@@ -100,7 +107,7 @@ void						delete_token(void *token_list, size_t size);
 **	src/lexer/main.c
 */
 
-t_list						*get_token_list(t_lexer *lexer);
+t_list						*get_token_list(t_lexer *lexer, t_list **tokens);
 
 /*
 **	src/lexer/recognize_token.c

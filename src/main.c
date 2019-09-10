@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 23:41:01 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 11:34:42 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:04:49 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,5 @@ int		main(void)
 	init_command_line();
 	init_signal_handlers();
 	while (1)
-	{
-		display_prompt();
-		get_cursor_position(&g_command_line.cursor_pos);
 		handle_input();
-	}
 }

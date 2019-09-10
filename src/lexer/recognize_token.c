@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:14:28 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 05:32:52 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 04:58:12 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int				apply_rules(t_lexer *lexer, t_atom_type cur_atom_type)
 			return (result);
 		}
 	}
+	lexer->current_state = state_error;
 	return (result);
 }
 
@@ -77,30 +78,44 @@ static t_token			*eoi_token(void)
 	return (eoi_token);
 }
 
+static t_token			*post_recognition(t_lexer *lexer,
+	int rules_response)
+{
+	t_token		*token;
+
+	token = NULL;
+	if (rules_response == RULE_END_INPUT)
+		return (NULL);
+	if (lexer->current_state == state_delim_token)
+	{
+		if (lexer->lexeme->length == 0)
+			lexer->current_state = state_end;
+		else
+			token = create_token(lexer, lexer->lexeme->content);
+		string_clear_content(lexer->lexeme);
+	}
+	return (token);
+}
+
 t_token					*recognize_token(t_lexer *lexer)
 {
-	t_string		*lexeme;
-	int				rules_response;
+	int				rules_response = 0;
 
-	if (!lexer->input)
-		return (NULL);
-	lexeme = string_init(0);
-	lexer_default_state(lexer);
-	while (lexer->current_state != state_end)
+	debug("recognize_token start\n");
+	lexer_default_state_step(lexer);
+	while (lexer->current_state != state_end
+		&& lexer->current_state != state_delim_token
+		&& rules_response != RULE_END_INPUT)
 	{
+		debug("lexer state %d\n", lexer->current_state);
 		rules_response = apply_rules(lexer, get_atom_type(*lexer->input));
 		if (rules_response & RULE_ADD_ATOM)
-			string_appendn(lexeme, lexer->input, 1);
+			string_appendn(lexer->lexeme, lexer->input, 1);
 		if (rules_response & RULE_MOVE_ATOM)
 			lexer->input++;
-		if (rules_response & RULE_END_TOKEN && lexeme->length > 0)
-			break ;
 		if (rules_response == 0)
-		{
-			debug("Unexpected atom %c\n", *lexer->input);
 			break ;
-		}
 	}
-	return (lexeme->length == 0 ? eoi_token()
-		: create_token(lexer, string_destroy(lexeme, true)));
+	debug("recognize_token end\n");
+	return (post_recognition(lexer, rules_response));
 }

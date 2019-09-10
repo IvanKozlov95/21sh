@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 18:07:17 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 01:54:25 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 17:09:35 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int				rule_2_3(t_lexer *l, t_atom_type cur_atom_type)
 {
 	if (l->current_state == state_op)
 	{
+		l->current_state = state_delim_token;
 		if (can_form_an_operator(l, cur_atom_type))
-			return (RULE_ADD_ATOM | RULE_MOVE_ATOM | RULE_END_TOKEN);
-		else
-			return (RULE_END_TOKEN);
+			return (RULE_ADD_ATOM | RULE_MOVE_ATOM);
+		return (RULE_NO_ACTION);
 	}
 	return (RULE_NO_APPLY);
 }

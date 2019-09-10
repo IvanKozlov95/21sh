@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:36:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/02 23:38:55 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:05:02 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ static void		get_input(void)
 			continue ;
 		if (buf[0] == '\n')
 			break ;
-		debug("ret: %d %x %x %x %x\n",
-			ret, buf[0], buf[1], buf[2], buf[4]);
 		if (!handle_special_keys(*(int *)buf))
 		{
-			debug("Inserting at postion %d\n",
-				g_command_line.cursor_pos.x - g_command_line.prompt_len - 1);
 			if (!string_insert(g_command_line.cmd, buf,
 				g_command_line.cursor_pos.x - g_command_line.prompt_len - 1))
 					fatal(-1, "Can't update command\n");
@@ -53,13 +49,29 @@ static void		get_input(void)
 void			handle_input(void)
 {
 	t_list 		*tkns;
+	t_list		*last_token;
 	t_lexer		*lexer;
 
-	string_init_content(g_command_line.cmd, 0);
-	get_input();
+	lexer = init_lexer();
+	tkns = NULL;
+	last_token = NULL;
+	while (!last_token || IS_EOI_TOKEN(last_token))
+	{
+		display_prompt();
+		get_cursor_position(&g_command_line.cursor_pos);
+		string_init_content(g_command_line.cmd, 0);
+		get_input();
+		lexer->input = g_command_line.cmd->content;
+		last_token = get_token_list(lexer, &tkns);
+		// debug("last token ptr %p\n", last_token);
+		// if (last_token)
+			// token_debug_info(last_token);
+		set_prompt(lexer->current_state);
+	}
+	debug("Done getting input\n");
 	command_line_history_add_command(g_command_line.cmd->content);
-	lexer = init_lexer(g_command_line.cmd->content);
-	tkns = get_token_list(lexer);
+	ft_free(1, g_command_line.cmd->content);
 	ft_lstiter(tkns, token_debug_info);
 	execute_ast_tree(parse(tkns));
+	ft_lstdel(&tkns, delete_token);
 }

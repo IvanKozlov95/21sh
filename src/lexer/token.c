@@ -6,11 +6,12 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:30:28 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/03 19:33:14 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 04:49:15 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "memory.h"
+#include "ftstring.h"
 
 #include "21sh.h"
 #include "lexer.h"
@@ -29,8 +30,9 @@ t_token				*create_token(t_lexer *l, char *value)
 	t_token		*ret;
 
 	ret = ft_memalloc(sizeof(t_token));
-	ret->value = value;
+	ret->value = ft_strdup(value);
 	ret->type = l->op_type != unkn ? token_op : token_word;
+	debug("created token with value |%s|\n", ret->value);
 	return (ret);
 }
 
