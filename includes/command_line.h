@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 20:46:36 by batman            #+#    #+#             */
-/*   Updated: 2019/08/31 12:07:10 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 16:28:44 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "dlist.h"
 # include "ft_math.h"
 # include "dstring.h"
+
+# include "lexer.h"
 
 struct									s_history
 {
@@ -30,6 +32,7 @@ struct									s_command_line
 	struct s_history	history;
 	t_point				cursor_pos;
 	size_t				prompt_len;
+	char				*custom_prompt;
 };
 
 typedef struct s_command_line			t_command_line;
@@ -41,6 +44,7 @@ extern t_command_line					g_command_line;
 */
 void									handle_input(void);
 void									display_prompt(void);
+void									set_prompt(t_fsm_state state);
 void									display_cursor(int c);
 void									display_current_command(void);
 void									init_command_line(void);
