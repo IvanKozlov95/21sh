@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 11:32:19 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/08 13:44:23 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static char			*get_path(char *cmd_name)
 	bool			can_execute;
 
 	can_execute = false;
+	// todo: check if local file is executable and starts with ./
 	path = lstat(cmd_name, &f) == -1 ? find_cmd_path(cmd_name, &f) : ft_strdup(cmd_name);
 	lstat(path, &f);
 	can_execute = S_ISREG(f.st_mode) && (f.st_mode & S_IXUSR);
