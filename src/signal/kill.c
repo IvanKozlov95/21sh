@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 20:37:32 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/08/31 06:35:48 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 14:29:38 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@
 void		sigkill_handler(int signo)
 {
 	(void)signo;
-	clear_current_command();
 	ft_printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 22:32:48 by batman            #+#    #+#             */
-/*   Updated: 2019/09/01 18:43:29 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 14:26:46 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ void				move_cursor_home(void)
 
 void				move_cursor_end(void)
 {
+	t_multiline		*cmds;
+
+	cmds = g_command_line.cmds;
 	move_cursor_pos(g_command_line.prompt_len
-		+ g_command_line.cmd->length + 1, -1);
+		+ cmds->lanes[g_command_line.current_line]->length + 1, -1);
 }

@@ -6,14 +6,17 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 07:18:27 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/08/31 11:32:54 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 14:30:36 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "memory.h"
 #include "ftstring.h"
 
+#include "multiline.h"
 #include "command_line.h"
+
+void	debug(char *fmt, ...);
 
 static void		command_line_history_display_active_item(void)
 {
@@ -27,9 +30,9 @@ static void		command_line_history_display_active_item(void)
 		ft_memcpy(history_command, g_command_line.history.active_item->content,
 			g_command_line.history.active_item->content_size);
 	}
-	string_clear_content(g_command_line.cmd);
+	multiline_destroy(g_command_line.cmds);
 	if (history_command)
-		string_append(g_command_line.cmd, history_command);
+		g_command_line.cmds = multiline_init_from_char_ptr(history_command);
 	ft_free(1, history_command);
 	display_current_command();
 }
@@ -69,4 +72,5 @@ void			command_line_history_add_command(char *command)
 		g_command_line.history.last_item =
 			g_command_line.history.last_item->next;
 	}
+	debug("added |%s| to history\n", command);
 }

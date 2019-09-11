@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 23:10:14 by batman            #+#    #+#             */
-/*   Updated: 2019/09/01 18:35:31 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 16:22:48 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 static void		delete_one_char(void)
 {
-	string_splice(g_command_line.cmd,
+	string_splice(g_command_line.cmds->lanes[g_command_line.current_line],
 		g_command_line.cursor_pos.x - g_command_line.prompt_len - 2, 1);
 	move_cursor(-1, 0);
 }
