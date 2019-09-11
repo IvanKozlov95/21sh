@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 08:42:57 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/10 05:07:25 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 20:13:16 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ enum						e_atom_type
 	dquote,
 	blank,
 	dollar,
+	nl,
 	apsd,
 	hash,
 	ppipe,
 	bquote,
 	smcln,
-	nl,
 	gt,
 	ls,
 	eos,
@@ -107,7 +107,7 @@ void						delete_token(void *token_list, size_t size);
 **	src/lexer/main.c
 */
 
-t_list						*get_token_list(t_lexer *lexer, t_list **tokens);
+t_list						*get_token_list(t_lexer *lexer);
 
 /*
 **	src/lexer/recognize_token.c

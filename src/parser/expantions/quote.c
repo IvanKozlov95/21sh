@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 01:57:08 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 13:11:01 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:33:54 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*single_quote_expantion(char **qoute_ptr)
 {
 	static t_expantion		quote_expantions[] = {
 		NULL, NULL, double_quote_expantion, NULL,
-		argument_expantion,
+		argument_expantion, NULL,
 	};
 
 	(*qoute_ptr)++;
@@ -42,7 +42,7 @@ char			*double_quote_expantion(char **quote_ptr)
 {
 	static t_expantion		quote_expantions[] = {
 		NULL, &single_quote_expantion, NULL, NULL,
-		argument_expantion,
+		argument_expantion, NULL,
 	};
 
 	(*quote_ptr)++;

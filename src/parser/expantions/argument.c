@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 13:04:55 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 13:34:28 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:33:15 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*argument_expantion(char **token_ptr)
 	char					*arg_value;
 	static t_expantion		quote_expantions[] = {
 		NULL, single_quote_expantion, double_quote_expantion, NULL,
-		NULL,
+		NULL, NULL,
 	};
 
 	(*token_ptr)++;

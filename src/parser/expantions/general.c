@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 04:01:02 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/06 05:58:15 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:30:49 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char		*expand_token(char *token)
 {
 	static t_expantion		general_expantions[] = {
 		NULL, &single_quote_expantion, &double_quote_expantion, NULL,
-		&argument_expantion,
+		&argument_expantion, NULL,
 	};
 
 	return (apply_expantion(&token, general_expantions, default_stop_condition));
