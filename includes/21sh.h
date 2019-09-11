@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/06 05:05:58 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/10 05:19:36 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ bool						handle_navigation_keys(int key);
 bool						handle_ctrl_d(int key);
 bool						handle_home_key(int key);
 bool						handle_end_key(int key);
+bool						handle_enter_key(int key);
 
 /*
 **	debug
