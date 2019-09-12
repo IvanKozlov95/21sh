@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:56:11 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 13:44:23 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 23:10:34 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void				execute_shell_command(t_shell_command *command)
 	char	*path;
 	int		status;
 
+	reset_config();
 	if (ft_strlen(command->argv[0]) == 0)
 		return ;
 	path = get_path(command->argv[0]);
@@ -135,4 +136,5 @@ void				execute_shell_command(t_shell_command *command)
 	}
 	else
 		wait(&status);
+	init_termconfig();
 }
