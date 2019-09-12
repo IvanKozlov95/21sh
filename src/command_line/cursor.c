@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 22:32:48 by batman            #+#    #+#             */
-/*   Updated: 2019/09/11 14:26:46 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:29:37 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,26 @@
 t_termconf			g_termconf;
 t_command_line		g_command_line;
 
-static void			move_cursor_pos(int x, int y)
+/*
+**	Gets cursor offset for current line
+**	If editing first line or there is a custom prompt(aka quote>)
+**	cursro has an offset equal to a prompt length
+*/
+
+int					get_cursor_offset(void)
 {
-	if (x >= 0)
-		g_command_line.cursor_pos.x = x;
-	if (y >= 0)
-		g_command_line.cursor_pos.y = y;
-	tputs(tgoto(g_termconf.cm,
-		g_command_line.cursor_pos.x - 1,
-		g_command_line.cursor_pos.y - 1),
-		g_termconf.descriptor, ft_putc);
+	if (g_command_line.current_line == 0 || g_command_line.custom_prompt)
+		return (g_command_line.prompt_len);
+	return (0);
+}
+
+void				move_cursor_pos(int x, int y)
+{
+	char		*tgoto_ret;
+
+	tgoto_ret = tgoto(g_termconf.cm, x, y);
+	tputs(tgoto_ret, g_termconf.descriptor, ft_putc);
+	// ft_free(1, tgoto_ret);
 }
 
 /*
@@ -41,9 +51,11 @@ static void			move_cursor_pos(int x, int y)
 
 void				move_cursor(int horizontal_delta, int vertical_delta)
 {
+	int				cursor_offset;
+
 	g_command_line.cursor_pos.x += horizontal_delta;
-	if (g_command_line.cursor_pos.x <= g_command_line.prompt_len + 1)
-		g_command_line.cursor_pos.x = g_command_line.prompt_len + 1;
+	if (g_command_line.cursor_pos.x <= get_cursor_offset() + 1)
+		g_command_line.cursor_pos.x = get_cursor_offset() + 1;
 	g_command_line.cursor_pos.y += vertical_delta;
 	g_command_line.cursor_pos.y = g_command_line.cursor_pos.y < 0
 		? 0 : g_command_line.cursor_pos.y;
@@ -83,7 +95,8 @@ int					get_cursor_position(t_point *cur_pos)
 
 void				move_cursor_home(void)
 {
-	move_cursor_pos(g_command_line.prompt_len + 1, -1);
+	g_command_line.cursor_pos.x = get_cursor_offset();
+	move_cursor_pos(g_command_line.cursor_pos.x, g_command_line.cursor_pos.y - 1);
 }
 
 void				move_cursor_end(void)
@@ -91,6 +104,8 @@ void				move_cursor_end(void)
 	t_multiline		*cmds;
 
 	cmds = g_command_line.cmds;
-	move_cursor_pos(g_command_line.prompt_len
-		+ cmds->lanes[g_command_line.current_line]->length + 1, -1);
+	g_command_line.cursor_pos.x = g_command_line.prompt_len
+		+ cmds->lanes[g_command_line.current_line]->length + 1;
+	move_cursor_pos(g_command_line.cursor_pos.x - 1,
+		g_command_line.cursor_pos.y - 1);
 }

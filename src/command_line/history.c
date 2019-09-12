@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 07:18:27 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/11 14:30:36 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:35:41 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static void		command_line_history_display_active_item(void)
 		g_command_line.cmds = multiline_init_from_char_ptr(history_command);
 	ft_free(1, history_command);
 	display_current_command();
+	// todo check for null
+	g_command_line.current_line = g_command_line.cmds->count - 1;
+	get_cursor_position(&g_command_line.cursor_pos);
 }
 
 void			command_line_history_move_active(int direction)

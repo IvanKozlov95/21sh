@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 20:46:36 by batman            #+#    #+#             */
-/*   Updated: 2019/09/11 16:05:41 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:28:07 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void									destroy_command_line(void);
 /*
 **	cursor
 */
+int										get_cursor_offset(void);
 void									move_cursor(int horizontal_delta,
 	int vertical_delta);
+void									move_cursor_pos(int x, int y);
 void									move_cursor_home(void);
 void									move_cursor_end(void);
 int										get_cursor_position(t_point *cur_pos);
