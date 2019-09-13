@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 20:37:32 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/11 14:29:38 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/13 01:26:09 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,8 @@ void		sigkill_handler(int signo)
 {
 	(void)signo;
 	ft_printf("\n");
+	reset_current_command_edition();
+	get_cursor_position(&g_command_line.initial_pos);
+	display_prompt();
+	get_cursor_position(&g_command_line.cursor_pos);
 }

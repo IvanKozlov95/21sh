@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 20:46:36 by batman            #+#    #+#             */
-/*   Updated: 2019/09/11 21:28:07 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/13 01:25:23 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void									display_current_command(void);
 void									display_current_line(void);
 void									init_command_line(void);
 void									destroy_command_line(void);
+void									reset_current_command_edition(void);
 
 /*
 **	cursor
