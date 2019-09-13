@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:31:47 by ivankozlov        #+#    #+#             */
-/*   Updated: 2019/09/10 05:19:36 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/09/13 00:47:29 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,13 @@ void							reset_config(void);
 void							init_termconfig(void);
 
 /*
-**	src/signal/init.c
+**	src/signal
 */
-
 void							init_signal_handlers(void);
-
-/*
-**	src/signal/sigkill.c
-*/
-
 void							sigkill_handler(int signo);
 void							sigquit_handler(int signo);
+void							sigwinch_handler(int signo);
+void							signal_reset(void);
 
 /*
 **	src/execute.c

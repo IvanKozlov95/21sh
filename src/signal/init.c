@@ -22,4 +22,5 @@ void		init_signal_handlers(void)
 	signal(SIGSTOP, sigquit_handler);
 	signal(SIGKILL, sigquit_handler);
 	signal(SIGQUIT, sigquit_handler);
+	signal(SIGWINCH, sigwinch_handler);
 }
