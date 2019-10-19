@@ -16,16 +16,27 @@
 #include "21sh.h"
 #include "lexer.h"
 
+static char		*stringify_token_type(int type)
+{
+	static char	*types[] = {
+		"word", "operator", "end of input",
+	};
+
+	if (type < 0 || type >= sizeof(types) / sizeof(char *))
+		return ("unknown");
+	return (types[type]);
+}
+
 void			token_debug_info(t_list *elem)
 {
 	t_token		*token;
 
 	token = elem->content;
-	debug("token: |%s| type: %d\n",
-		token->value, token->type);
+	debug("token: |%s| type: %s\n",
+		token->value, stringify_token_type(token->type));
 }
 
-t_token				*create_token(t_lexer *l, char *value)
+t_token			*create_token(t_lexer *l, char *value)
 {
 	t_token		*ret;
 
@@ -36,7 +47,7 @@ t_token				*create_token(t_lexer *l, char *value)
 	return (ret);
 }
 
-void		delete_token(void *token_list, size_t size)
+void			delete_token(void *token_list, size_t size)
 {
 	t_token		*token;
 
