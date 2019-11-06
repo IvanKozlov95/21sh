@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:14:28 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/10 04:58:12 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/11/05 20:57:24 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static int				apply_rules(t_lexer *lexer, t_atom_type cur_atom_type)
 		result = rules[i](lexer, cur_atom_type);
 		if (result != 0)
 		{
-			debug("char %c applied rule #%d with result %d\n",
-				*lexer->input, i, result);
+			debug("char %c applied rule #%s with result %s\n",
+				*lexer->input, debug_str_rule(i), debug_str_rule_result(result));
 			return (result);
 		}
 	}
