@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 18:37:42 by ikozlov           #+#    #+#             */
-/*   Updated: 2019/09/04 14:43:08 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/11/05 20:28:18 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ t_btree_node		*complete_command1(void)
 		free_node(list_node, delete_ast_node);
 		return (NULL);
 	}
-	// todo: node types ??
-	node = new_btree_node(NULL, 0);
-	node->left = list_node;
-	node->right = complete_command_node;
+	node = list_node;
+	node->left = complete_command_node;
 	return (node);
 }
 
@@ -67,9 +65,7 @@ t_btree_node		*complete_command2(void)
 		free_node(list_node, delete_ast_node);
 		return (NULL);
 	}
-	// todo: node types ??
-	node = new_btree_node(NULL, 0);
-	node->left = list_node;
+	node = list_node;
 	return (node);
 }
 

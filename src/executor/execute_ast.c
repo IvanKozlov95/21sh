@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 17:23:42 by batman            #+#    #+#             */
-/*   Updated: 2019/09/08 11:21:27 by ikozlov          ###   ########.fr       */
+/*   Updated: 2019/11/05 20:19:54 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,15 @@ void		execute_program(t_btree_node *program_node)
 
 	if (!program_node)
 		return ;
-	ast_program = program_node->content;
-	if (ast_program->type == ast_pipe)
-		execute_pipe(program_node);
-	else
-		execute_simple_command(program_node);
+	while (program_node)
+	{
+		ast_program = program_node->content;
+		if (ast_program->type == ast_pipe)
+			execute_pipe(program_node);
+		else
+			execute_simple_command(program_node);
+		program_node = program_node->left;
+	}
 }
 
 void		execute_ast_tree(t_btree_node *ast)
